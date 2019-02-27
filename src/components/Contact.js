@@ -15,7 +15,13 @@ class Contact extends Component {
     return (
       <div className="card card-body mb-3">
         <h4>
-          {name} <i onClick={this.handleClick} className="fas fa-angle-down" />
+          {name}{" "}
+          <i
+            onClick={this.handleClick}
+            className={
+              showContactInfo ? "fas fa-angle-up" : "fas fa-angle-down"
+            }
+          />
         </h4>
 
         {showContactInfo ? (
