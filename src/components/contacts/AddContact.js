@@ -4,7 +4,7 @@ import TextInputGroup from "../layouts/TextInputGroup";
 import uuid from "uuid";
 
 class AddContact extends Component {
-  state = { name: "", email: "", phone: "" };
+  state = { name: "", email: "", phone: "", errors: {} };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -12,15 +12,28 @@ class AddContact extends Component {
 
   onSubmit = (dispatch, e) => {
     e.preventDefault();
+
+    //Check for errors
+    if (name === "") {
+      this.setState({ errors: { name: "Name is required" } });
+    }
+    if (email === "") {
+      this.setState({ errors: { email: "Email is required" } });
+    }
+    if (phone === "") {
+      this.setState({ errors: { phone: "Phone number is required" } });
+    }
+
     const { name, email, phone } = this.state;
+
     const newContact = { id: uuid.v4(), name, email, phone };
     dispatch({ type: "ADD_CONTACT", payload: newContact });
 
     //Clear state after adding new contact
-    this.setState({ name: "", email: "", phone: "" });
+    this.setState({ name: "", email: "", phone: "", errors: {} });
   };
   render() {
-    const { name, email, phone } = this.state;
+    const { name, email, phone, errors } = this.state;
 
     return (
       <Consumer>
@@ -37,6 +50,7 @@ class AddContact extends Component {
                     placeholder="Enter name"
                     value={name}
                     onChange={this.onChange}
+                    error={errors.name}
                   />
 
                   <TextInputGroup
@@ -46,6 +60,7 @@ class AddContact extends Component {
                     placeholder="Enter email"
                     value={email}
                     onChange={this.onChange}
+                    error={errors.email}
                   />
 
                   <TextInputGroup
@@ -54,6 +69,7 @@ class AddContact extends Component {
                     placeholder="Enter phone"
                     value={phone}
                     onChange={this.onChange}
+                    error={errors.phone}
                   />
                   <input
                     className="btn btn-light btn-block"

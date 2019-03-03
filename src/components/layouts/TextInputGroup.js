@@ -7,18 +7,20 @@ const TextInputGroup = ({
   type,
   placeholder,
   value,
-  onChange
+  onChange,
+  error
 }) => (
   <div className="form-group">
     <label htmlFor={name}>{label}</label>
     <input
       type={type}
       name={name}
-      className="form-control"
+      className={error ? "is-invalid form-control" : "form-control"}
       placeholder={placeholder}
       value={value}
       onChange={onChange}
     />
+    <div className="invalid-feedback">{error}</div>
   </div>
 );
 
