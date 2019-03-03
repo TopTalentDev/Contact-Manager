@@ -14,7 +14,9 @@ class AddContact extends Component {
     const { name, email, phone } = this.state;
     const newContact = { id: uuid.v4(), name, email, phone };
     dispatch({ type: "ADD_CONTACT", payload: newContact });
-    console.log(this.state);
+
+    //Clear state after adding new contact
+    this.setState({ name: "", email: "", phone: "" });
   };
   render() {
     const { name, email, phone } = this.state;
