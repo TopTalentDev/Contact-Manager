@@ -12,19 +12,21 @@ class AddContact extends Component {
 
   onSubmit = (dispatch, e) => {
     e.preventDefault();
+    const { name, email, phone } = this.state;
 
     //Check for errors
     if (name === "") {
       this.setState({ errors: { name: "Name is required" } });
+      return;
     }
     if (email === "") {
       this.setState({ errors: { email: "Email is required" } });
+      return;
     }
     if (phone === "") {
       this.setState({ errors: { phone: "Phone number is required" } });
+      return;
     }
-
-    const { name, email, phone } = this.state;
 
     const newContact = { id: uuid.v4(), name, email, phone };
     dispatch({ type: "ADD_CONTACT", payload: newContact });
