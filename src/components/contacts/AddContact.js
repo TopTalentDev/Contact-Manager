@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Consumer } from "../../context";
-import TextInputGroup from "../layouts/TextInputGroup";
+import TextInputGroup from "../layout/TextInputGroup";
 import uuid from "uuid";
 
 class AddContact extends Component {
@@ -33,6 +33,8 @@ class AddContact extends Component {
 
     //Clear state after adding new contact
     this.setState({ name: "", email: "", phone: "", errors: {} });
+
+    this.props.history.push("/");
   };
   render() {
     const { name, email, phone, errors } = this.state;
